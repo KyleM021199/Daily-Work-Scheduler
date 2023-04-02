@@ -1,20 +1,41 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+var today = dayjs();
+var hourNum = 9;
 var saveButton = $('.saveBtn');
-var hourList = $('.container');
+var hourList = $('.container-lg')
+var hourOne = $('#hour-1');
+var timeSlot = $('.row');
 var pastDate = $('.past');
 var presentDate = $('.present'); 
-var futureDate = $('.future');  
+var futureDate = $('.future'); 
+var eventBox = $('.description'); 
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
+  // TODO: Add a listener for click events on the save button.
+  // This code should use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  saveButton.addEventListener('click', function (event){
-    event.preventDefault();
+  for(var i = 0; i < hourNum; i++){
+ var domTest = hourList.children(timeSlot).eq(i);
+ domTest.text();
+ console.log(domTest.text());
+}
+
+
+  saveButton.on('click', function () {
+    var userInput = eventBox.val();
+    localStorage.setItem("storedEvent", userInput);
+
+    var scheduledEvent = localStorage.getItem("storedEvent");
+
+    console.log(hourList);
+  
+
+    
+
 
 
   });  
@@ -50,7 +71,6 @@ $(function () {
 //             return num + 'th'
 //     }
 // }
-  var today = dayjs();
   var currentDate = today.format('dddd, MMMM D');
   $('#currentDay').text(currentDate);
 });
