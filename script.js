@@ -5,8 +5,7 @@ var today = dayjs();
 var hourNum = 9;
 var saveButton = $('.saveBtn');
 var hourList = $('.container-lg')
-var hourOne = $('#hour-1');
-var timeSlot = $('.row');
+var hourBlocks = $('#hour');
 var pastDate = $('.past');
 var presentDate = $('.present'); 
 var futureDate = $('.future'); 
@@ -19,14 +18,20 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   for(var i = 0; i < hourNum; i++){
- var domTest = hourList.children(timeSlot).eq(i);
- domTest.text();
- console.log(domTest.text());
+ var hourSlots = hourList.children(hourBlocks).eq(i);
+ var buttonSlots = hourSlots.children().eq(2);
+ console.log(hourSlots);
 }
 
 
-  saveButton.on('click', function () {
+
+
+  saveButton.on('click', function (event) {
+    event.preventDefault();
+    event.target
     var userInput = eventBox.val();
+
+
     localStorage.setItem("storedEvent", userInput);
 
     var scheduledEvent = localStorage.getItem("storedEvent");
@@ -43,12 +48,13 @@ $(function () {
 
   //
   // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
+  // block by comparing the id to the current hour. (compare hour id to dayjs().hour()?) HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
-
+  //Need list:
+  //dayjs for comparing the time to schedule blocks(possibly )
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
