@@ -4,7 +4,8 @@
 var today = dayjs();
 var hourNum = 9;
 var saveButton = $('.saveBtn');
-var hourList = $('.container-lg')
+var hourList = $('.container-lg');
+var timeRow = $('.row');
 var hourBlocks = $('#hour');
 var pastDate = $('.past');
 var presentDate = $('.present'); 
@@ -17,28 +18,35 @@ $(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
+  //var key =
+
+//var deleteEl = $(
+//   '<td><button class="btn btn-sm btn-delete-project" data-index="' +
+//   i +
+//   '">X</button></td>'
+// );
   for(var i = 0; i < hourNum; i++){
- var hourSlots = hourList.children(hourBlocks).eq(i);
- var buttonSlots = hourSlots.children().eq(2);
- console.log(hourSlots);
-}
+  var hourSlots = hourList.children(hourBlocks).eq(i);
+  var buttonSlots = hourSlots.children().eq(2);
+  if(buttonSlots == hourSlots){
+  console.log(hourSlots);
+  }
+ }
 
-
+ function storeScheduledEvent(){
+  var userInput = eventBox.val();
+  localStorage.setItem("storedEvent", userInput);
+  //var scheduledEvent = localStorage.getItem("storedEvent");
+ }
 
 
   saveButton.on('click', function (event) {
     event.preventDefault();
     event.target
-    var userInput = eventBox.val();
-
-
-    localStorage.setItem("storedEvent", userInput);
-
-    var scheduledEvent = localStorage.getItem("storedEvent");
-
-    console.log(hourList);
-  
-
+    
+    //storeScheduledEvent();
+    //console.log(buttonSlots);
+ 
     
 
 
@@ -53,6 +61,21 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
+  function changeInTime(){
+    //var currentHour = dayjs().hour();
+    /*if (timeSlot > currentHour){
+      timeRow.addClass('future');
+      timeRow.removeClass("present past");
+    } else if (timeSlot = currentHour){
+      timeRow.addClass('present');
+      timeRow.removeClass("future past");
+    } else {
+      timeRow.addClass('past');
+      timeRow.removeClass("future present");
+      
+    }
+    */
+  }
   //Need list:
   //dayjs for comparing the time to schedule blocks(possibly )
   // TODO: Add code to get any user input that was saved in localStorage and set
@@ -62,6 +85,14 @@ $(function () {
 
 
   // TODO: Add code to display the current date in the header of the page.
+
+  var currentDate = today.format('dddd, MMMM D');
+  $('#currentDay').text(currentDate);
+});
+
+
+
+
 //  var addOrdinal = (num) => {
 //     switch(num){
 //         case 1:
@@ -77,6 +108,3 @@ $(function () {
 //             return num + 'th'
 //     }
 // }
-  var currentDate = today.format('dddd, MMMM D');
-  $('#currentDay').text(currentDate);
-});
