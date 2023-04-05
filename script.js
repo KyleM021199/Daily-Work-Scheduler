@@ -60,12 +60,14 @@ var futureDate = $('.future');
   // current hour in 24-hour time?
   //
   function changeInTime(){
-    //var currentHour = dayjs().hour();
+    for ( var i = 0; i < localStorage.length; i++ ) {
+      var key = localStorage.key( i );
+    var currentHour = dayjs().hour();
     //var timeSlot = localStorage.getItem("hour");
-    /*if (timeSlot > currentHour){
+    if (key > currentHour){
       timeRow.addClass('future');
       timeRow.removeClass("present past");
-    } else if (timeSlot == currentHour){
+    } else if (key == currentHour){
       timeRow.addClass('present');
       timeRow.removeClass("future past");
     } else {
@@ -73,8 +75,8 @@ var futureDate = $('.future');
       timeRow.removeClass("future present");
       
     }
-    */
   }
+}
   //Need list:
   //dayjs for comparing the time to schedule blocks(possibly )
   // TODO: Add code to get any user input that was saved in localStorage and set
@@ -83,17 +85,24 @@ var futureDate = $('.future');
   //
 
 
-  // TODO: Add code to display the current date in the header of the page.
-console.log(hourSlots.attr('id'));
+  // TODO: Add code to display the current date in the header of the page
 
-for (var i = 1; i <= localStorage.length; i++) {
-  var hourId = $('#hour-'+ i);
-  if(dayjs().hour() > 2){
- console.log(hourId);
-  }else{
-    console.log(hourId);
+  for ( var i = 0; i < localStorage.length; i++ ) {
+    var hourId = $('#hour-'+ i);
+    var key = localStorage.key( i );
+    var value = localStorage[key];
+
+    console.log(key);
+    
   }
-}
+// for (var i = 1; i <= localStorage.length; i++) {
+//   var hourId = $('#hour-'+ i);
+//   if(dayjs().hour() > 2){
+//  console.log(hourId);
+//   }else{
+//     console.log(hourId);
+//   }
+// }
   var currentDate = today.format('dddd, MMMM D');
   $('#currentDay').text(currentDate);
 });
