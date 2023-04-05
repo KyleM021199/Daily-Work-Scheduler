@@ -1,17 +1,15 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
+$(function () {
 var today = dayjs();
-var hourNum = 9;
-var saveButton = $('.saveBtn');
-var hourList = $('.container-lg');
+//var hourNum = 9;
+//var hourList = $('.container-lg');
 var timeRow = $('.row');
-var hourBlocks = $('#hour');
 var pastDate = $('.past');
 var presentDate = $('.present'); 
 var futureDate = $('.future'); 
-var eventBox = $('.description'); 
-$(function () {
   // TODO: Add a listener for click events on the save button.
   // This code should use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -25,27 +23,22 @@ $(function () {
 //   i +
 //   '">X</button></td>'
 // );
-  for(var i = 0; i < hourNum; i++){
-  var hourSlots = hourList.children(hourBlocks).eq(i);
-  var buttonSlots = hourSlots.children().eq(2);
-  if(buttonSlots == hourSlots){
-  console.log(hourSlots);
-  }
+  // for(var i = 0; i < hourNum; i++){
+  // var hourSlots = hourList.children(hourBlocks).eq(i);
+  // var buttonSlots = hourSlots.children().eq(2);
+  // if(buttonSlots == hourSlots){
+  // console.log(hourSlots);
+  // }
+
+ function storeScheduledEvent(description, hour){
+  localStorage.setItem(hour,description);
  }
 
- function storeScheduledEvent(){
-  var userInput = eventBox.val();
-  localStorage.setItem("storedEvent", userInput);
-  //var scheduledEvent = localStorage.getItem("storedEvent");
- }
-
-
-  saveButton.on('click', function (event) {
-    event.preventDefault();
-    event.target
-    
-    //storeScheduledEvent();
-    //console.log(buttonSlots);
+ $('.saveBtn').on('click', function () {
+   var hourTag = $(this).parent().attr('id');
+   var descriptionTag = $(this).siblings('.description').val(); 
+   console.log(descriptionTag);
+    storeScheduledEvent(descriptionTag, hourTag);
  
     
 
@@ -64,9 +57,9 @@ $(function () {
   function changeInTime(){
     //var currentHour = dayjs().hour();
     /*if (timeSlot > currentHour){
-      timeRow.addClass('future');
+      timeRow.addClass(futureDate);
       timeRow.removeClass("present past");
-    } else if (timeSlot = currentHour){
+    } else if (timeSlot == currentHour){
       timeRow.addClass('present');
       timeRow.removeClass("future past");
     } else {
