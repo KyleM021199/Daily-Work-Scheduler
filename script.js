@@ -5,7 +5,7 @@
 $(function () {
 var today = dayjs();
 //var hourNum = 9;
-//var hourList = $('.container-lg');
+var hourList = $('.container-lg');
 var timeRow = $('.row');
 var pastDate = $('.past');
 var presentDate = $('.present'); 
@@ -24,22 +24,27 @@ var futureDate = $('.future');
 //   '">X</button></td>'
 // );
   // for(var i = 0; i < hourNum; i++){
-  // var hourSlots = hourList.children(hourBlocks).eq(i);
-  // var buttonSlots = hourSlots.children().eq(2);
+  var hourSlots = hourList.children();
+  var buttonSlots = hourSlots.children().eq(2);
   // if(buttonSlots == hourSlots){
-  // console.log(hourSlots);
+   console.log(hourSlots);
   // }
 
  function storeScheduledEvent(description, hour){
   localStorage.setItem(hour,description);
  }
 
+ function getScheduledEvent(){
+
+  localStorage.getItem(hourSlots.attr('id'));
+ }
+
  $('.saveBtn').on('click', function () {
    var hourTag = $(this).parent().attr('id');
-   var descriptionTag = $(this).siblings('.description').val(); 
-   console.log(descriptionTag);
-    storeScheduledEvent(descriptionTag, hourTag);
- 
+   var descriptionUserInput = $(this).siblings('.description').val(); 
+   console.log(descriptionUserInput);
+    storeScheduledEvent(descriptionUserInput, hourTag);
+    //getScheduledEvent();
     
 
 
@@ -56,8 +61,9 @@ var futureDate = $('.future');
   //
   function changeInTime(){
     //var currentHour = dayjs().hour();
+    //var timeSlot = localStorage.getItem("hour");
     /*if (timeSlot > currentHour){
-      timeRow.addClass(futureDate);
+      timeRow.addClass('future');
       timeRow.removeClass("present past");
     } else if (timeSlot == currentHour){
       timeRow.addClass('present');
@@ -78,7 +84,16 @@ var futureDate = $('.future');
 
 
   // TODO: Add code to display the current date in the header of the page.
+console.log(hourSlots.attr('id'));
 
+for (var i = 1; i <= localStorage.length; i++) {
+  var hourId = $('#hour-'+ i);
+  if(dayjs().hour() > 2){
+ console.log(hourId);
+  }else{
+    console.log(hourId);
+  }
+}
   var currentDate = today.format('dddd, MMMM D');
   $('#currentDay').text(currentDate);
 });
