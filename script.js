@@ -61,33 +61,37 @@ var futureDate = $('.future');
   //
   function changeInTime(){
     for ( var i = 0; i < localStorage.length; i++ ) {
-      var key = localStorage.key( i );
+      var key = localStorage.key( i-1 );
     }
-    var currentHour = "hour-"+dayjs().hour();
+    var currentHour = dayjs().hour();
+    
+
+   var timeSlot =key.slice(5, 6);
     //var timeSlot = localStorage.getItem("hour");
-    if (key == currentHour){
-      if (key > currentHour){
+    if (timeSlot > currentHour){
+      
       timeRow.addClass('future');
       timeRow.removeClass("present past");
-      }
-      // console.log(key);
-      // console.log(currentHour);
-    } else if (key == currentHour){
-      if (key == currentHour){
+      console.log(key);
+      console.log(currentHour);
+    } else if (timeSlot === currentHour){
+
       timeRow.addClass('present');
       timeRow.removeClass("future past");
-      }
-      // console.log(key);
-      // console.log(currentHour);
-    } else if(key == currentHour) {
-      if (key < currentHour){
+      
+       console.log(key);
+      console.log(currentHour);
+    } else if(timeSlot < currentHour) {
+      
       timeRow.addClass('past');
       timeRow.removeClass("future present");
-      // console.log(key);
-      // console.log(currentHour);
-      }
+      console.log(key);
+      console.log(currentHour);
     }
-    console.log(currentHour);
+  
+      //console.log(currentHour);
+    //timeRow.append(currentHour)
+
   }
   
 
