@@ -44,55 +44,84 @@ var futureDate = $('.future');
    var descriptionUserInput = $(this).siblings('.description').val(); 
    console.log(descriptionUserInput);
     storeScheduledEvent(descriptionUserInput, hourTag);
-    //getScheduledEvent();
-    
-
-
-
   });  
 
 
-  //
+ for (var i = 9; i <= 17 ; i++ ) {
+       var key = localStorage.getItem( "hour-" + (i));
+     console.log(key);
+  $("#hour-"+ i +" .description").val(key);
+ }
+
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. (compare hour id to dayjs().hour()?) HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  //
-  function changeInTime(){
-    for ( var i = 0; i < localStorage.length; i++ ) {
-      var key = localStorage.key( i-1 );
-    }
-    var currentHour = dayjs().hour();
+
+  var currentHour = dayjs().hour();
+  //var currentHour = 12
+  timeRow.each(function(){
+    var rowHour = parseInt($(this).attr('id').split("-")[1]);
+    console.log(rowHour, currentHour);
+    if (rowHour > currentHour){
+      
+          $(this).addClass('future');
+         $(this).removeClass("present past");
+          // console.log(key);
+          // console.log(currentHour);
+        } else if (rowHour === currentHour){
+    
+          $(this).addClass('present');
+           $(this).removeClass("future past");
+          
+          //  console.log(key);
+          // console.log(currentHour);
+        } else if(rowHour < currentHour) {
+          
+           $(this).addClass('past');
+           $(this).removeClass("future present");
+          // console.log(key);
+          // console.log(currentHour);
+        }
+
+  })
+  // function changeInTime(){
+    //can be used for user population
+  //   for ( var i = 9; i <= 17 ; i++ ) {
+  //     var key = localStorage.getItem( "hour-" + (i));
+  //   console.log(key);
+    
     
 
-   var timeSlot =key.slice(5, 6);
-    //var timeSlot = localStorage.getItem("hour");
-    if (timeSlot > currentHour){
+  //  console.log(i,currentHour);
+  //  console.log(timeRow);
+  //   //var timeSlot = localStorage.getItem("hour");
+  //   if (rowHour > currentHour){
       
-      timeRow.addClass('future');
-      timeRow.removeClass("present past");
-      console.log(key);
-      console.log(currentHour);
-    } else if (timeSlot === currentHour){
+  //     $(this).addClass('future');
+  //    $(this).removeClass("present past");
+  //     // console.log(key);
+  //     // console.log(currentHour);
+  //   } else if (rowHour === currentHour){
 
-      timeRow.addClass('present');
-      timeRow.removeClass("future past");
+  //     $(this).addClass('present');
+  //      $(this).removeClass("future past");
       
-       console.log(key);
-      console.log(currentHour);
-    } else if(timeSlot < currentHour) {
+  //     //  console.log(key);
+  //     // console.log(currentHour);
+  //   } else if(i < currentHour) {
       
-      timeRow.addClass('past');
-      timeRow.removeClass("future present");
-      console.log(key);
-      console.log(currentHour);
-    }
-  
-      //console.log(currentHour);
-    //timeRow.append(currentHour)
+  //      $(this).addClass('past');
+  //      $(this).removeClass("future present");
+  //     // console.log(key);
+  //     // console.log(currentHour);
+  //   }
+  // } 
+  //     //console.log(currentHour);
+  //   //timeRow.append(currentHour)
 
-  }
+  // }
   
 
   //Need list:
@@ -121,7 +150,7 @@ var futureDate = $('.future');
 //     console.log(hourId);
 //   }
 // }
-  changeInTime();
+  //changeInTime();
   var currentDate = today.format('dddd, MMMM D');
   $('#currentDay').text(currentDate);
 });
