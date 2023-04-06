@@ -6,6 +6,7 @@ This project is a daily work scheduler with the intention to help people organiz
 ## Usage
 * the user will input into any of the time blocks
 * the user's input will be saved upon clicking the save button next to the time slot the user typed in
+![Daily-Scheduler](https://user-images.githubusercontent.com/118197174/230460612-ee04a704-b010-4324-9874-0e57081a47fb.jpg)
 
 ## Features
 * time slots between 9AM and 5PM
